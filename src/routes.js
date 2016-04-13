@@ -2,14 +2,16 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 
 import App from './components/App';
-import FuelSavingsPage from './containers/FuelSavingsPage';
-import AboutPage from './components/AboutPage.js';
+import ScorePage from './containers/ScorePage';
+import EditParticipantsPage from './containers/EditParticipantsPage';
+import StatsPage from './containers/StatsPage.js';
 import NotFoundPage from './components/NotFoundPage.js';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={FuelSavingsPage} />
-    <Route path="about" component={AboutPage}/>
+    <IndexRoute component={ScorePage} />
+    <Route path="edit" component={EditParticipantsPage}/>
+    <Route path="stats" component={StatsPage}/>
     <Route path="*" component={NotFoundPage} />
   </Route>
 );
