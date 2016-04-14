@@ -7,18 +7,25 @@ import EditParticipant from '../components/EditParticipant';
 
 export class Container extends Component {
   render() {
-    const participantsEditList = this.props.appState.participants.map((name) => (
-      <li key={name}>
-        <EditParticipant
-          onDelete={this.props.actions.deleteParticipant}
-          onRename={this.props.actions.renameParticipant}
-          name={name}
-        />
-      </li>
+    const _participantsEditList = this.props.appState.participants.map((name) => (
+      <EditParticipant
+        key={name}
+        onDelete={this.props.actions.deleteParticipant}
+        onRename={this.props.actions.renameParticipant}
+        name={name}
+      />
     ));
+
+    const participantsEditList = _participantsEditList.length
+      ? (<div className="ui piled segments"> {_participantsEditList} </div>)
+      : null;
+
+    const styles = {
+      marginTop: 40
+    };
+
     return (
-      <div>
-        <h2> Participants ({this.props.appState.participants.length})</h2>
+      <div style={styles}>
         <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
         {participantsEditList}
       </div>

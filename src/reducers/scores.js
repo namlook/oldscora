@@ -16,8 +16,10 @@ const initialState = {
 
 const actions = {
   [ADD_PARTICIPANT]: (state, action) => {
+    if (state.participants.indexOf(action.name) > -1) return state;
     const participants = action.name ? [...state.participants, action.name] : state.participants;
-    return Object.assign({}, state, { participants: participants });
+    const scores = Object.assign({}, state.scores, { [action.name]: [0] });
+    return Object.assign({}, state, { participants, scores });
   },
 
   [RENAME_PARTICIPANT]: (state, { oldName, newName }) => {

@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import Participant from '../components/Participant';
+import { Link } from 'react-router';
 
 
 export class Container extends Component {
@@ -18,21 +19,24 @@ export class Container extends Component {
     };
 
     const participantsList = participants.map((name) => (
-      <li key={name}>
-        <Participant
-          name={name}
-          onAddScore={this.props.actions.addScore}
-        />
-        {totalFor(name)}
-      </li>
+      <Participant
+        key={name}
+        name={name}
+        total={totalFor(name)}
+        onAddScore={this.props.actions.addScore}
+      />
     ));
 
-    return (
-      <div>
-        <h2> Participants ({participants.length})</h2>
-        {participantsList}
-      </div>
-    );
+    return participantsList.length
+      ? <div>{participantsList}</div>
+      : (
+        <div className="ui message">
+          <div className="header">
+            {"You don't have any participants listed"}
+          </div>
+          <p><Link to="/edit">add some participants first</Link></p>
+        </div>
+      );
   }
 }
 

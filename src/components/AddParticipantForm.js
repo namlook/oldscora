@@ -18,21 +18,31 @@ export class Component extends React.Component {
 
   addParticipant(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.name);
-    this.setState({name: ''});
+    if (this.state.name) {
+      this.props.onSubmit(this.state.name);
+      this.setState({name: ''});
+    }
   }
 
   render() {
     return (
-      <form onSubmit={(e) => this.addParticipant(e)}>
-        <input
-          type="text"
-          name="newParticipant"
-          value={this.state.name}
-          onChange={(e) => this.nameChanged(e)}
-        />
-      <input type="submit" value="add" />
-      </form>
+      <div className="ui grid">
+        <div className="sixteen wide column">
+          <form className="ui form" onSubmit={(e) => this.addParticipant(e)}>
+            <div className="ui mini action input">
+              <input
+                type="text"
+                name="newParticipant"
+                value={this.state.name}
+                onChange={(e) => this.nameChanged(e)}
+              />
+              <button className="ui teal button">
+                add
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     );
   }
 }

@@ -29,23 +29,108 @@ export class Component extends React.Component {
   render() {
     const props = this.props;
     return (
-      <p>
-        {props.name}
-        <button onClick={(e) => this.addNegativeScore()}>-</button>
-        <input
-          name="score"
-          type="number"
-          value={this.state.score}
-          onChange={(e) => this.onScoreChanged(e)}
-        />
-        <button onClick={(e) => this.addPositiveScore()}>+</button>
-      </p>
+      <div className="ui stackable grid segment">
+
+        <div className="three wide column middle aligned">
+          <div className="ui grid">
+            <div className="height wide middle aligned column">
+              <h1>{props.name}</h1>
+            </div>
+            <div className="height wide right aligned column mobile only">
+              <div className="ui statistic">
+                <div className="label">
+                  score
+                </div>
+                <div className="value">
+                  {props.total}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="ten wide column middle aligned">
+          <div className="ui grid">
+            <div className="one column center aligned">
+              <div className="ui mini action input">
+                <button className="ui red basic button" onClick={(e) => this.addNegativeScore()}>-</button>
+                <input
+                  name="score"
+                  type="number"
+                  pattern="[0-9]*" inputmode="numeric"
+                  value={this.state.score}
+                  onChange={(e) => this.onScoreChanged(e)}
+                />
+                <button className="ui green basic  button" onClick={(e) => this.addPositiveScore()}>+</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      {/*
+        <div className="ten wide column middle aligned">
+        <div className="ui stackable secondary menu">
+          <div className="item">
+            <button className="fluid ui red basic button" onClick={(e) => this.addNegativeScore()}>-</button>
+          </div>
+          <div className="item">
+            <div className="ui input">
+              <input
+                name="score"
+                type="number"
+                pattern="[0-9]*" inputmode="numeric"
+                value={this.state.score}
+                onChange={(e) => this.onScoreChanged(e)}
+              />
+            </div>
+          </div>
+          <div className="item">
+            <button className="fluid ui green basic button" onClick={(e) => this.addPositiveScore()}>+</button>
+          </div>
+        </div>
+      </div>
+      */}
+
+        {/*}<div className="column middle aligned ">
+          <div className="ui form">
+            <div className="fields">
+              <div className="field">
+                <button className="ui red basic button" onClick={(e) => this.addNegativeScore()}>-</button>
+              </div>
+              <div className="field">
+                <input
+                  name="score"
+                  type="number"
+                  pattern="[0-9]*" inputmode="numeric"
+                  value={this.state.score}
+                  onChange={(e) => this.onScoreChanged(e)}
+                />
+              </div>
+              <div className="field">
+                <button className="ui green basic button" onClick={(e) => this.addPositiveScore()}>+</button>
+              </div>
+            </div>
+          </div>
+        </div>*/}
+
+        <div className="three wide column right aligned tablet computer only grid">
+          <div className="ui statistic">
+            <div className="label">
+              score
+            </div>
+            <div className="value">
+              {props.total}
+            </div>
+          </div>
+        </div>
+      </div>
     );
   }
 }
 
 Component.propTypes = {
   name: PropTypes.element.string,
+  total: PropTypes.element.integer,
   onAddScore: PropTypes.element.fn
 };
 
