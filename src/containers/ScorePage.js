@@ -13,12 +13,18 @@ export class Container extends Component {
     const { scores, currentScores, participants, currentLap } = this.props.appState;
 
     const currentScoreFor = (name) => currentScores[name] || '-';
+    const totalFor = (name) => {
+      return (scores[name] || []).reduce((total, score) => {
+        return total + score;
+      }, 0);
+    };
 
     const participantsList = participants.map((name) => (
       <Participant
         key={name}
         name={name}
         currentScore={currentScoreFor(name)}
+        totalScore={totalFor(name)}
         onAddScore={this.props.actions.addScore}
       />
     ));
