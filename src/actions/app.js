@@ -15,3 +15,12 @@ export function renameParticipant(oldName, newName) {
 export function addScore(participantName, score) {
 	return { type: types.ADD_SCORE, participantName, score };
 }
+
+export function moveUpParticipant(participantName) {
+  console.log('up', participantName);
+	return { type: types.MOVE_UP_PARTICIPANT, participantName };
+}
+
+export function moveDownParticipant(participantName) {
+	return { type: types.MOVE_DOWN_PARTICIPANT, participantName };
+}

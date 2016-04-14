@@ -12,6 +12,8 @@ export class Container extends Component {
         key={name}
         onDelete={this.props.actions.deleteParticipant}
         onRename={this.props.actions.renameParticipant}
+        onMoveUp={this.props.actions.moveUpParticipant}
+        onMoveDown={this.props.actions.moveDownParticipant}
         name={name}
       />
     ));

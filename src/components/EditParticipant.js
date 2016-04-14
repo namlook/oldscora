@@ -12,6 +12,15 @@ const Component = (props) => {
     props.onRename(props.name, event.target.value);
   };
 
+  const moveUpParticipant = () => {
+    props.onMoveUp(props.name);
+  };
+
+  const moveDownParticipant = () => {
+    props.onMoveDown(props.name);
+  };
+
+
   return (
     <div className="ui segment">
       <div className="ui form">
@@ -27,8 +36,8 @@ const Component = (props) => {
       <div className="ui hidden divider"></div>
       <div className="container">
         <div className="ui buttons">
-          <button className="ui button">^</button>
-          <button className="ui button">v</button>
+          <button className="ui button" onClick={() => moveUpParticipant()}>^</button>
+          <button className="ui button" onClick={() => moveDownParticipant()}>v</button>
         </div>
         <button className="ui red right floated button" onClick={deleteParticipant}>supprimer</button>
       </div>

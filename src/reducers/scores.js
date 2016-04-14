@@ -3,7 +3,9 @@ import {
   ADD_PARTICIPANT,
   ADD_SCORE,
   DELETE_PARTICIPANT,
-  RENAME_PARTICIPANT
+  RENAME_PARTICIPANT,
+  MOVE_UP_PARTICIPANT,
+  MOVE_DOWN_PARTICIPANT
 } from '../constants/actionTypes';
 import objectAssign from 'object-assign';
 import _ from 'lodash';
@@ -31,11 +33,46 @@ const actions = {
     const newParticipants = [
       ...participants.slice(0, oldNameIndex),
       newName,
-      ...participants.slice(oldNameIndex+1)
+      ...participants.slice(oldNameIndex + 1)
     ];
     const _newScores = Object.assign({}, state.scores, { [newName]: state.scores[oldName] });
     const newScores = _.omit(_newScores, oldName);
     return Object.assign({}, state, { participants: newParticipants, scores: newScores });
+  },
+
+  [MOVE_UP_PARTICIPANT]: (state, { participantName }) => {
+    const { participants } = state;
+    const participantIndex = participants.indexOf(participantName);
+    if (participantIndex < 1) return state;
+
+    const newParticipants = [
+      ...participants.slice(0, participantIndex - 1),
+      participantName,
+      ...[].concat(
+        participants.slice(participantIndex - 1, participantIndex),
+        participants.slice(participantIndex + 1)
+      )
+    ];
+
+    return Object.assign({}, state, { participants: newParticipants });
+  },
+
+  [MOVE_DOWN_PARTICIPANT]: (state, { participantName }) => {
+    const { participants } = state;
+    const participantIndex = participants.indexOf(participantName);
+    if (participantIndex === -1) return state;
+    if (participantIndex === participants.length -1) return state;
+
+    const newParticipants = [
+      ...[].concat(
+        participants.slice(0, participantIndex),
+        participants.slice(participantIndex + 1, participantIndex + 2)
+      ),
+      participantName,
+      ...participants.slice(participantIndex + 2)
+    ];
+
+    return Object.assign({}, state, { participants: newParticipants });
   },
 
   [DELETE_PARTICIPANT]: (state, { name }) => {
