@@ -7,12 +7,22 @@ import {
   MOVE_UP_PARTICIPANT,
   MOVE_DOWN_PARTICIPANT
 } from '../constants/actionTypes';
+
 import objectAssign from 'object-assign';
 import _ from 'lodash';
 
 const initialState = {
   participants: [],
-  scores: {}
+  scores: {},
+  currentScores: {},
+  currentLap: 1
+};
+
+const isLastLap = (currentLap, participants, scores) => {
+  const allParticipantsWhoPlayThatLap = Object.keys(scores).filter((name) => (
+    scores[name].length > currentLap
+  ));
+  return allParticipantsWhoPlayThatLap.length === participants.length;
 };
 
 
@@ -20,7 +30,8 @@ const actions = {
   [ADD_PARTICIPANT]: (state, action) => {
     if (state.participants.indexOf(action.name) > -1) return state;
     const participants = action.name ? [...state.participants, action.name] : state.participants;
-    const scores = Object.assign({}, state.scores, { [action.name]: [0] });
+    const placeholder = _.range(state.currentLap).map(() => 0);
+    const scores = Object.assign({}, state.scores, { [action.name]: placeholder });
     return Object.assign({}, state, { participants, scores });
   },
 
@@ -85,10 +96,18 @@ const actions = {
     if (!participantName) {
       return state;
     }
+
     const participantScores = _.get(state, `scores.${participantName}`, []);
     const updatedScores = [...participantScores, score];
     const scores = Object.assign({}, state.scores, {[participantName]: updatedScores});
-    return Object.assign({}, state, { scores });
+    let currentScores = Object.assign({}, state.currentScores, { [participantName]: score });
+
+    let currentLap = state.currentLap;
+    if (isLastLap(state.currentLap, state.participants, scores)) {
+      currentLap = state.currentLap + 1;
+      currentScores = {};
+    }
+    return Object.assign({}, state, { scores, currentLap, currentScores });
   }
 };
 

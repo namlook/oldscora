@@ -32,12 +32,42 @@ export class Container extends Component {
   render() {
 
     const { scores } = this.props.appState;
+
+    const totalFor = (name) => {
+      return (scores[name] || []).reduce((total, score) => {
+        return total + score;
+      }, 0);
+    };
+
+    const totalStatistics = Object.keys(scores).map((name) => (
+      <div key={name} className="column center aligned">
+        <div className="ui statistic">
+          <div className="label">
+            {name}
+          </div>
+          <div className="value">
+            {totalFor(name)}
+          </div>
+        </div>
+      </div>
+    ));
+
     const highchartsConfig = buildHighchartsConfig(scores);
 
+    const chart = _.isEmpty(highchartsConfig.series)
+      ? <p>no scores to compute on...</p>
+      : <ReactHighcharts config={highchartsConfig}  />;
+
     return (
-        _.isEmpty(highchartsConfig.series)
-          ? <p>no scores to compute on...</p>
-          : <ReactHighcharts config={highchartsConfig}  />
+        <div>
+          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Totals </h4>
+          <div className="ui equal width grid">
+            {totalStatistics}
+          </div>
+          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Statistics </h4>
+          {chart}
+        </div>
+
     );
   }
 }

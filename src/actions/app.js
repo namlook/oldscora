@@ -17,7 +17,6 @@ export function addScore(participantName, score) {
 }
 
 export function moveUpParticipant(participantName) {
-  console.log('up', participantName);
 	return { type: types.MOVE_UP_PARTICIPANT, participantName };
 }
 

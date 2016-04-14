@@ -28,6 +28,7 @@ export class Component extends React.Component {
 
   render() {
     const props = this.props;
+
     return (
       <div className="ui stackable grid segment">
 
@@ -119,7 +120,7 @@ export class Component extends React.Component {
               score
             </div>
             <div className="value">
-              {props.total}
+              {props.currentScore}
             </div>
           </div>
         </div>
@@ -130,7 +131,7 @@ export class Component extends React.Component {
 
 Component.propTypes = {
   name: PropTypes.element.string,
-  total: PropTypes.element.integer,
+  currentScore: PropTypes.element.integer,
   onAddScore: PropTypes.element.fn
 };
 

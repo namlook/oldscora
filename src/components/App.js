@@ -12,9 +12,11 @@ const App = (props) => {
     <div className="ui text container">
       <div style={styles.menu} className="ui pointing menu">
         <div className="header item" to="/"><b>Scorebut</b></div>
-        <IndexLink className="item" activeClassName="active" to="/">scores</IndexLink>
-        <Link className="item" activeClassName="active" to="/edit">edit</Link>
+        <Link className="item" activeClassName="active" to="/scores">scores</Link>
         <Link className="item" activeClassName="active" to="/stats">stats</Link>
+        <div className="right menu">
+          <IndexLink className="item" activeClassName="active" to="/">edit</IndexLink>
+        </div>
       </div>
       {props.children}
     </div>

@@ -10,27 +10,29 @@ import { Link } from 'react-router';
 export class Container extends Component {
   render() {
 
-    const { scores, participants } = this.props.appState;
+    const { scores, currentScores, participants, currentLap } = this.props.appState;
 
-    const totalFor = (name) => {
-      return (scores[name] || []).reduce((total, score) => {
-        return total + score;
-      }, 0);
-    };
+    const currentScoreFor = (name) => currentScores[name] || '-';
 
     const participantsList = participants.map((name) => (
       <Participant
         key={name}
         name={name}
-        total={totalFor(name)}
+        currentScore={currentScoreFor(name)}
         onAddScore={this.props.actions.addScore}
       />
     ));
 
-    return participantsList.length
-      ? <div>{participantsList}</div>
-      : (
-        <div className="ui message">
+    if (participantsList.length) {
+      return (
+        <div>
+          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Lap {currentLap} </h4>
+          {participantsList}
+        </div>
+      );
+    }
+    return (
+        <div className="ui info message">
           <div className="header">
             {"You don't have any participants listed"}
           </div>

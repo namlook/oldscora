@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
@@ -27,9 +28,19 @@ export class Container extends Component {
     };
 
     return (
-      <div style={styles}>
-        <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
-        {participantsEditList}
+      <div>
+        <div style={styles} className="ui two columns grid">
+          <div className="column">
+            <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
+          </div>
+          <div className= "right aligned column">
+            <Link className="ui teal button" to="scores">done</Link>
+          </div>
+        </div>
+        <div className="ui hidden divider"></div>
+        <div>
+          {participantsEditList}
+        </div>
       </div>
     );
   }

@@ -9,8 +9,8 @@ import NotFoundPage from './components/NotFoundPage.js';
 
 export default (
   <Route path="/" component={App}>
-    <IndexRoute component={ScorePage} />
-    <Route path="edit" component={EditParticipantsPage}/>
+    <Route path="scores" component={ScorePage} />
+    <IndexRoute component={EditParticipantsPage}/>
     <Route path="stats" component={StatsPage}/>
     <Route path="*" component={NotFoundPage} />
   </Route>
