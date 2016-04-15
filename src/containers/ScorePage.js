@@ -19,6 +19,8 @@ export class Container extends Component {
       }, 0);
     };
 
+    const isDisabled = (name) => (scores[name].length - 1 >= currentLap);
+
     const participantsList = participants.map((name) => (
       <Participant
         key={name}
@@ -26,6 +28,7 @@ export class Container extends Component {
         currentScore={currentScoreFor(name)}
         totalScore={totalFor(name)}
         onAddScore={this.props.actions.addScore}
+        disabled={isDisabled(name)}
       />
     ));
 

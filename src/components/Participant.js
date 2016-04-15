@@ -32,9 +32,11 @@ export class Component extends React.Component {
 
     const scores = <h2>{props.currentScore} / {props.totalScore}</h2>;
 
-    return (
-      <div className="ui stackable grid segment">
+    const disabled = props.disabled ? 'disabled' : '';
+    const className = `ui stackable grid segment ${disabled}`;
 
+    return (
+      <div className={className}>
         <div className="three wide column middle aligned">
           <div className="ui grid">
             <div className="height wide middle aligned column">
