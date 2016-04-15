@@ -1,31 +1,57 @@
-/* Variables */
-$vin-blue: #5bb7db;
-$vin-green: #60b044;
-$vin-red: #ff0000;
+/* Semantic UI Global */
+@import '~semantic-ui-reset/reset.css';
+@import '~semantic-ui-site/site.css';
 
-/* Styles */
-body {
-  font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  line-height: 1.4em;
-  color: #4d4d4d;
-  min-width: 230px;
-  max-width: 550px;
-  margin: 0 auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-font-smoothing: antialiased;
-  font-smoothing: antialiased;
-  font-weight: 300;
-}
+/*  Semantic UI Elements */
+@import '~semantic-ui-button/button.css';
+@import '~semantic-ui-container/container.css';
+@import '~semantic-ui-divider/divider.css';
+/*@import '~semantic-ui-flag/flag.css';*/
+@import '~semantic-ui-header/header.css';
+@import '~semantic-ui-icon/icon.css';
+/*@import '~semantic-ui-image/image.css';*/
+@import '~semantic-ui-input/input.css';
+@import '~semantic-ui-label/label.css';
+@import '~semantic-ui-list/list.css';
+@import '~semantic-ui-loader/loader.css';
+/*@import '~semantic-ui-rail/rail.css';*/
+/*@import '~semantic-ui-reveal/reveal.css';*/
+@import '~semantic-ui-segment/segment.css';
+/*@import '~semantic-ui-step/step.css';*/
 
-td {
-	padding: 12px;
-}
+/* Semantic UI Collections */
+/*@import '~semantic-ui-breadcrumb/breadcrumb.css';*/
+@import '~semantic-ui-form/form.css';
+@import '~semantic-ui-grid/grid.css';
+@import '~semantic-ui-menu/menu.css';
+@import '~semantic-ui-message/message.css';
+/*@import '~semantic-ui-table/table.css';*/
 
-h2 {
-	color: $vin-blue;
-}
+/* Semantic UI Views */
+/*@import '~semantic-ui-ad/ad.css';*/
+/*@import '~semantic-ui-card/card.css';*/
+/*@import '~semantic-ui-comment/comment.css';*/
+/*@import '~semantic-ui-feed/feed.css';*/
+/*@import '~semantic-ui-item/item.css';*/
+@import '~semantic-ui-statistic/statistic.css';
 
-.savings { color: $vin-green; }
-.loss { color: $vin-red; }
-input.small { width: 46px; }
-td.fuel-savings-label { width: 175px; }
+/* Semantic UI Modules */
+/*@import '~semantic-ui-accordion/accordion.css';*/
+/*@import '~semantic-ui-checkbox/checkbox.css';*/
+/*@import '~semantic-ui-dimmer/dimmer.css';*/
+/*@import '~semantic-ui-dropdown/dropdown.css';*/
+/*@import '~semantic-ui-embed/embed.css';*/
+/*@import '~semantic-ui-modal/modal.css';*/
+/*@import '~semantic-ui-nag/nag.css';*/
+/*@import '~semantic-ui-popup/popup.css';*/
+/*@import '~semantic-ui-progress/progress.css';*/
+/*@import '~semantic-ui-rating/rating.css';*/
+/*@import '~semantic-ui-search/search.css';*/
+/*@import '~semantic-ui-shape/shape.css';*/
+/*@import '~semantic-ui-sidebar/sidebar.css';*/
+/*@import '~semantic-ui-sticky/sticky.css';*/
+/*@import '~semantic-ui-tab/tab.css';*/
+/*@import '~semantic-ui-transition/transition.css';*/
+
+/* User custom styles */
+// @import 'custom.css';
