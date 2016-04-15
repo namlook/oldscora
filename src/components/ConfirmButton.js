@@ -8,23 +8,28 @@ export class Component extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = { label: props.displayLabel, confirmState: false };
+    this.state = { confirmState: false, timer: null };
   }
 
   clicked() {
-    if (!this.state.confirmState) {
-      this.setState({ label: this.props.confirmLabel, confirmState: true });
-    } else {
-      this.setState({ label: this.props.displayLabel, confirmState: false });
+    if (this.state.confirmState) {
+      clearTimeout(this.state.timer);
+      this.setState({ confirmState: false, timer: null });
       this.props.onConfirm();
+    } else {
+      const timer = setTimeout(() => {
+        this.setState({ timer: null, confirmState: false });
+      }, 1500);
+      this.setState({ confirmState: true, timer });
     }
   }
 
   render() {
     const className = `${this.props.className} ui basic button`;
+    const { props } = this;
     return (
       <button className={className} onClick={(e) => this.clicked()}>
-        {this.state.label}
+        {this.state.confirmState ? props.confirmLabel : props.displayLabel}
       </button>
     );
   }
