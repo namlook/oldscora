@@ -34,7 +34,7 @@ export class Container extends Component {
             <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
           </div>
           <div className= "right aligned column">
-            <Link className="ui teal button" to="scores">done</Link>
+            <Link className="ui violet button" to="scores">done</Link>
           </div>
         </div>
         <div className="ui hidden divider"></div>

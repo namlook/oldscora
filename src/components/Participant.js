@@ -51,7 +51,7 @@ export class Component extends React.Component {
         <div className="ten wide column middle aligned">
           <div className="ui grid">
             <div className="one column center aligned">
-              <div className="ui mini action input">
+              <div className="ui mini action fluid input">
                 <ConfirmButton
                   className="red"
                   displayLabel="-"

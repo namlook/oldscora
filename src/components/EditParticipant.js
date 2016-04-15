@@ -44,54 +44,6 @@ const Component = (props) => {
     </div>
   );
 
-  // return (
-  //     <div className="item">
-  //       <div className="ui vertical buttons">
-  //         <button className="ui button">^</button>
-  //         <button className="ui button">v</button>
-  //       </div>
-  //       <div className="content">
-  //         <div className="header">
-  //         </div>
-  //         <div className="description">
-  //           <div className="ui input">
-  //             <input
-  //               name="participant"
-  //               type="text"
-  //               defaultValue={props.name}
-  //               onBlur={(e) => renameParticipant(e)}
-  //             />
-  //           </div>
-  //         </div>
-  //         <div className="extra">
-  //           <button className="ui red button" onClick={deleteParticipant}>supprimer</button>
-  //         </div>
-  //       </div>
-  //     </div>
-  // );
-
-
-  // return (
-  //   <div className="ui two stackable column grid segment">
-  //     <div className="column">
-  //       <div className="ui mini action input">
-  //         <button className="ui button">^</button>
-  //         <div className="ui input">
-  //           <input
-  //             name="participant"
-  //             type="text"
-  //             defaultValue={props.name}
-  //             onBlur={(e) => renameParticipant(e)}
-  //           />
-  //         </div>
-  //         <button className="ui button">v</button>
-  //       </div>
-  //     </div>
-  //     <div className="column">
-  //       <button className="ui red button" onClick={deleteParticipant}>supprimer</button>
-  //     </div>
-  //   </div>
-  // );
 };
 
 Component.propTypes = {

@@ -23,3 +23,7 @@ export function moveUpParticipant(participantName) {
 export function moveDownParticipant(participantName) {
 	return { type: types.MOVE_DOWN_PARTICIPANT, participantName };
 }
+
+export function revertState(index) {
+  return { type: types.REVERT_STATE, index };
+}

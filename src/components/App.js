@@ -1,16 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Link, IndexLink } from 'react-router';
 
-const App = (props) => {
-  const styles = {
-    menu: {
-      marginTop: 20
-    }
-  };
+const styles = {
+  marginTop: '4em'
+};
 
+const App = (props) => {
   return (
-    <div className="ui text container">
-      <div style={styles.menu} className="ui pointing menu">
+    <div>
+      <div className="ui fixed inverted violet large pointing menu">
         <div className="header item" to="/"><b>Scorebut</b></div>
         <Link className="item" activeClassName="active" to="/scores">scores</Link>
         <Link className="item" activeClassName="active" to="/stats">stats</Link>
@@ -18,7 +16,9 @@ const App = (props) => {
           <IndexLink className="item" activeClassName="active" to="/">edit</IndexLink>
         </div>
       </div>
-      {props.children}
+      <div style={styles} className="ui text container">
+        {props.children}
+      </div>
     </div>
   );
 };

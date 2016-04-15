@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
@@ -25,13 +26,16 @@ const buildHighchartsConfig = (scores) => {
     .map((name) => ({ name, data: computeData(scoresFor(name)) }))
     .filter((item) => !_.isEmpty(item.data));
 
-  return { series };
+  return {
+    title: { text: '' },
+    series
+  };
 };
 
 export class Container extends Component {
   render() {
 
-    const { scores } = this.props.appState;
+    const { scores, currentLap } = this.props.appState;
 
     const totalFor = (name) => {
       return (scores[name] || []).reduce((total, score) => {
@@ -58,14 +62,25 @@ export class Container extends Component {
       ? <p>no scores to compute on...</p>
       : <ReactHighcharts config={highchartsConfig}  />;
 
-    return (
+    return currentLap === 1
+      ?  (
+        <div className="ui info message">
+          <div className="header">
+            {"No scores found"}
+          </div>
+          <p>{'start the game and'} <Link to="/scores"> {'add some scores first'} </Link></p>
+        </div>
+      )
+      : (
         <div>
-          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Totals </h4>
+          <h2 className="ui horizontal divider header"> <i className="trophy icon"></i> Totals </h2>
           <div className="ui equal width grid">
             {totalStatistics}
           </div>
-          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Statistics </h4>
+          <div style={{marginTop: '3em'}}>
+          <h2 className="ui horizontal divider header"> <i className="line chart icon"></i> Statistics </h2>
           {chart}
+          </div>
         </div>
 
     );

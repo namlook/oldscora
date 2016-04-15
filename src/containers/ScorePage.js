@@ -35,7 +35,10 @@ export class Container extends Component {
     if (participantsList.length) {
       return (
         <div>
-          <h4 className="ui horizontal divider header"> <i className="tag icon"></i> Lap {currentLap} </h4>
+          <h2 className="ui horizontal divider header">
+            <i className="history icon"></i>
+            Tour {currentLap}
+          </h2>
           {participantsList}
         </div>
       );

@@ -5,7 +5,8 @@ import {
   DELETE_PARTICIPANT,
   RENAME_PARTICIPANT,
   MOVE_UP_PARTICIPANT,
-  MOVE_DOWN_PARTICIPANT
+  MOVE_DOWN_PARTICIPANT,
+  REVERT_STATE
 } from '../constants/actionTypes';
 
 import objectAssign from 'object-assign';
@@ -24,6 +25,8 @@ const isLastLap = (currentLap, participants, scores) => {
   ));
   return allParticipantsWhoPlayThatLap.length === participants.length;
 };
+
+const statesHistory = [];
 
 
 const actions = {
@@ -108,11 +111,16 @@ const actions = {
       currentScores = {};
     }
     return Object.assign({}, state, { scores, currentLap, currentScores });
+  },
+
+  [REVERT_STATE]: (state, { index }) => {
+    return statesHistory[index];
   }
 };
 
 
 export default (state = initialState, action) => {
+  statesHistory.push(state);
   const actionFn = actions[action.type];
   return actionFn ? actionFn(state, action) : state;
 };
