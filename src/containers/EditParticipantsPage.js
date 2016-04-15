@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import EditParticipant from '../components/EditParticipant';
+import UndoControls from '../components/UndoControls';
 
 export class Container extends Component {
   render() {
@@ -24,17 +25,18 @@ export class Container extends Component {
       : null;
 
     const styles = {
-      marginTop: 40
+      marginTop: '1em'
     };
 
     return (
       <div>
+        <UndoControls actions={this.props.actions} />
         <div style={styles} className="ui two columns grid">
           <div className="column">
             <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
           </div>
           <div className= "right aligned column">
-            <Link className="ui violet button" to="scores">done</Link>
+            <Link className="ui violet button" to="/">done</Link>
           </div>
         </div>
         <div className="ui hidden divider"></div>

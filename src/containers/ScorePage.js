@@ -4,7 +4,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import Participant from '../components/Participant';
-import { Link } from 'react-router';
+import UndoControls from '../components/UndoControls';
+import { Link, browserHistory } from 'react-router';
 
 
 export class Container extends Component {
@@ -32,25 +33,21 @@ export class Container extends Component {
       />
     ));
 
-    if (participantsList.length) {
-      return (
-        <div>
-          <h2 className="ui horizontal divider header">
-            <i className="history icon"></i>
-            Tour {currentLap}
-          </h2>
-          {participantsList}
-        </div>
-      );
+    if (!participantsList.length) {
+      browserHistory.push('/edit');
     }
+
+
     return (
-        <div className="ui info message">
-          <div className="header">
-            {"You don't have any participants listed"}
-          </div>
-          <p><Link to="/edit">add some participants first</Link></p>
-        </div>
-      );
+      <div>
+        <UndoControls actions={this.props.actions} />
+        <h2 className="ui horizontal divider header">
+          <i className="history icon"></i>
+          Tour {currentLap}
+        </h2>
+        {participantsList}
+      </div>
+    );
   }
 }
 

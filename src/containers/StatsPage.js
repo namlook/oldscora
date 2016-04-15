@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import Participant from '../components/Participant';
+import UndoControls from '../components/UndoControls';
 
 import ReactHighcharts from 'react-highcharts';
 import _ from 'lodash';
@@ -28,6 +29,11 @@ const buildHighchartsConfig = (scores) => {
 
   return {
     title: { text: '' },
+    plotOptions: {
+      series: {
+        animation: false
+      }
+    },
     series
   };
 };
@@ -35,7 +41,7 @@ const buildHighchartsConfig = (scores) => {
 export class Container extends Component {
   render() {
 
-    const { scores, currentLap } = this.props.appState;
+    const { scores, participants } = this.props.appState;
 
     const totalFor = (name) => {
       return (scores[name] || []).reduce((total, score) => {
@@ -62,8 +68,8 @@ export class Container extends Component {
       ? <p>no scores to compute on...</p>
       : <ReactHighcharts config={highchartsConfig}  />;
 
-    return currentLap === 1
-      ?  (
+    const body = !participants.length
+      ? (
         <div className="ui info message">
           <div className="header">
             {"No scores found"}
@@ -82,7 +88,13 @@ export class Container extends Component {
           {chart}
           </div>
         </div>
+    );
 
+    return (
+      <div>
+        <UndoControls actions={this.props.actions} />
+        {body}
+      </div>
     );
   }
 }

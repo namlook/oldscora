@@ -30,7 +30,7 @@ export class Component extends React.Component {
   render() {
     const props = this.props;
 
-    const scores = <h2>{props.currentScore} / {props.totalScore}</h2>;
+    const scores = <h2>{props.currentScore} <i className="ui small trophy icon" /> {props.totalScore}</h2>;
 
     const disabled = props.disabled ? 'disabled' : '';
     const className = `ui stackable grid segment ${disabled}`;

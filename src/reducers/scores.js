@@ -16,7 +16,8 @@ const initialState = {
   participants: [],
   scores: {},
   currentScores: {},
-  currentLap: 1
+  currentLap: 1,
+  history: 0
 };
 
 const isLastLap = (currentLap, participants, scores) => {
@@ -26,7 +27,8 @@ const isLastLap = (currentLap, participants, scores) => {
   return allParticipantsWhoPlayThatLap.length === participants.length;
 };
 
-const statesHistory = [];
+let statesHistory = [];
+let stateIndex = 0;
 
 
 const actions = {
@@ -114,13 +116,24 @@ const actions = {
   },
 
   [REVERT_STATE]: (state, { index }) => {
-    return statesHistory[index];
+    if (stateIndex + index > statesHistory.length) {
+      return statesHistory.slice(-1)[0];
+    }
+    if (stateIndex + index - 1 < 0) {
+      return state;
+    }
+    stateIndex += index;
+    const newState = statesHistory[stateIndex - 1];
+    return newState;
   }
 };
 
-
 export default (state = initialState, action) => {
-  statesHistory.push(state);
   const actionFn = actions[action.type];
-  return actionFn ? actionFn(state, action) : state;
+  const newState = actionFn ? actionFn(state, action) : state;
+  if (action.type != REVERT_STATE) {
+    statesHistory = [...statesHistory.slice(0, stateIndex), newState];
+    stateIndex += 1;
+  }
+  return newState;
 };
