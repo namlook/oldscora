@@ -28,7 +28,7 @@ export default {
   module: {
     loaders: [
       {test: /\.js$/, include: path.join(__dirname, 'src'), loaders: ['babel', 'eslint']},
-      {test: /\.(jpe?g|png|gif|svg)$/i, loaders: ['file']},
+      {test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)$/i, loaders: ['file']},
       {
         test: /(\.css|\.scss)$/,
         include: path.join(__dirname, 'src'),
