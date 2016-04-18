@@ -31,6 +31,8 @@ export class AddParticipantForm extends React.Component {
               <input
                 type="text"
                 name="newParticipant"
+                spellCheck="false"
+                autoCorrect="off"
                 value={this.state.name}
                 onChange={(e) => this.nameChanged(e)}
               />
