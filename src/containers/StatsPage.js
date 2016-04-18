@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { Link } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
@@ -42,6 +42,10 @@ export class Container extends Component {
   render() {
 
     const { scores, participants } = this.props.appState;
+
+    if (!participants.length) {
+      hashHistory.replace('/edit');
+    }
 
     const totalFor = (name) => {
       return (scores[name] || []).reduce((total, score) => {

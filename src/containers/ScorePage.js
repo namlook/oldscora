@@ -5,7 +5,7 @@ import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import Participant from '../components/Participant';
 import UndoControls from '../components/UndoControls';
-import { Link, browserHistory } from 'react-router';
+import { Link, hashHistory } from 'react-router';
 
 
 export class Container extends Component {
@@ -34,7 +34,7 @@ export class Container extends Component {
     ));
 
     if (!participantsList.length) {
-      browserHistory.push('/edit');
+      hashHistory.replace('/edit');
     }
 
 
