@@ -15,7 +15,7 @@ export default {
   target: 'web', // necessary per https://webpack.github.io/docs/testing.html#compile-and-test
   output: {
     path: __dirname + '/dist', // Note: Physical files are only output by the production build task `npm run build`.
-    publicPath: '/scora',
+    publicPath: '/scora/',
     filename: 'bundle.js'
   },
   plugins: [
@@ -32,7 +32,7 @@ export default {
       {
         test: /(\.css|\.scss)$/,
         include: path.join(__dirname, 'src'),
-        loader: ExtractTextPlugin.extract("css!sass?sourceMap"})
+        loader: ExtractTextPlugin.extract("css!sass?sourceMap")
       }
     ]
   }
