@@ -9,13 +9,17 @@ import UndoControls from '../components/UndoControls';
 
 const styles = {
   marginTop: '4em',
-  marginBottom: '6em'
+  marginBottom: '10em'
 };
 
 export class Container extends Component {
 
   render() {
-    window.scrollTo(0, 0); // scroll to top each time we change page
+    // window.scrollTo(0, 0); // scroll to top each time we change page
+
+    const bottomMenuDisabled = !this.props.appState.participants.length ? 'disabled segment' : '';
+    const bottomMenuClass = `ui three item labeled icon bottom fixed menu ${bottomMenuDisabled}`;
+    const bottomMenuStyle = bottomMenuDisabled ? {padding: 0} : {};
 
     return (
       <div>
@@ -38,7 +42,7 @@ export class Container extends Component {
         <div style={styles} className="ui text container">
           {this.props.children}
         </div>
-        <div className="ui three item labeled icon bottom fixed menu">
+        <div className={bottomMenuClass} style={bottomMenuStyle}>
           <Link to="/" activeClassName="active" className="item">
             <i className="gamepad icon"></i>
             Scores

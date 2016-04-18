@@ -8,7 +8,8 @@ import EditParticipant from '../components/EditParticipant';
 
 export class EditPage extends Component {
   render() {
-    const _participantsEditList = this.props.appState.participants.map((name) => (
+    const { participants } = this.props.appState;
+    const _participantsEditList = participants.map((name) => (
       <EditParticipant
         key={name}
         onDelete={this.props.actions.deleteParticipant}
@@ -19,7 +20,7 @@ export class EditPage extends Component {
       />
     ));
 
-    const participantsEditList = _participantsEditList.length
+    const participantsEditList = participants.length
       ? (<div className="ui piled segments"> {_participantsEditList} </div>)
       : null;
 
@@ -27,17 +28,23 @@ export class EditPage extends Component {
       marginTop: '1em'
     };
 
+    const hintLabel = participants.length ? null : (
+      <div style={{width: '200px'}} className="ui pointing large teal basic label">
+        <i className="info icon"></i>Commencez par ajouter quelques joueurs...
+      </div>
+    );
+
     return (
       <div>
         <div style={styles} className="ui two columns grid">
           <div className="column">
             <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
+            {hintLabel}
           </div>
           <div className= "right aligned column">
             <Link className="ui violet button" to="/">done</Link>
           </div>
         </div>
-        <div className="ui hidden divider"></div>
         {participantsEditList}
       </div>
     );

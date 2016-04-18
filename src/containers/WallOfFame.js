@@ -18,6 +18,8 @@ export class Container extends Component {
   }
 
   render() {
+    window.scrollTo(0, 0); // scroll to top each time we change page
+
     const { scores, participants } = this.props.appState;
 
     const totalFor = (name) => {

@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Component = (props) => {
+const UndoControl = (props) => {
     return (
       <div className="ui center aligned container">
         <div className="ui icon buttons">
@@ -15,4 +15,8 @@ const Component = (props) => {
     );
 };
 
-export default Component;
+UndoControl.propTypes = {
+  actions: PropTypes.object.isRequired
+};
+
+export default UndoControl;

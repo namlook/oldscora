@@ -26,8 +26,6 @@ export class AddParticipantForm extends React.Component {
 
   render() {
     return (
-      <div className="ui grid">
-        <div className="sixteen wide column">
           <form className="ui form" onSubmit={(e) => this.addParticipant(e)}>
             <div className="ui mini action input">
               <input
@@ -36,13 +34,11 @@ export class AddParticipantForm extends React.Component {
                 value={this.state.name}
                 onChange={(e) => this.nameChanged(e)}
               />
-              <button className="ui teal button">
+              <button className="ui teal button" onClick={(e) => this.addParticipant(e)}>
                 add
               </button>
             </div>
           </form>
-        </div>
-      </div>
     );
   }
 }

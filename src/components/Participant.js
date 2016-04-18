@@ -9,17 +9,17 @@ export class Component extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {score: 0};
+    this.state = {score: ''};
   }
 
   addNegativeScore() {
     this.props.onAddScore(this.props.name, -this.state.score);
-    this.setState({ score: 0 });
+    this.setState({ score: '' });
   }
 
   addPositiveScore() {
     this.props.onAddScore(this.props.name, this.state.score);
-    this.setState({ score: 0 });
+    this.setState({ score: '' });
   }
 
   onScoreChanged(event) {

@@ -45,6 +45,8 @@ export class Container extends Component {
   }
 
   render() {
+    window.scrollTo(0, 0); // scroll to top each time we change page
+
     const { scores, participants } = this.props.appState;
 
     const highchartsConfig = buildHighchartsConfig(scores);
@@ -54,7 +56,7 @@ export class Container extends Component {
       : <ReactHighcharts config={highchartsConfig}  />;
 
     return (
-      <div style={{marginTop: '3em'}}>
+      <div style={{marginTop: '3em'}}>{/*} marginBottom: '10em'}}>*/}
         <h2 className="ui horizontal divider header"> <i className="line chart icon"></i> Statistics </h2>
         {chart}
       </div>
