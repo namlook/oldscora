@@ -36,10 +36,10 @@ export class Component extends React.Component {
 }
 
 Component.propTypes = {
-  className: PropTypes.element.string,
-  displayLabel: PropTypes.element.string,
-  confirmLabel: PropTypes.element.string,
-  onConfirm: PropTypes.element.fn
+  className: PropTypes.string,
+  displayLabel: PropTypes.string.isRequired,
+  confirmLabel: PropTypes.string.isRequired,
+  onConfirm: PropTypes.func.isRequired
 };
 
 export default Component;

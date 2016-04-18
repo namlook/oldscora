@@ -5,9 +5,8 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import EditParticipant from '../components/EditParticipant';
-import UndoControls from '../components/UndoControls';
 
-export class Container extends Component {
+export class EditPage extends Component {
   render() {
     const _participantsEditList = this.props.appState.participants.map((name) => (
       <EditParticipant
@@ -30,7 +29,6 @@ export class Container extends Component {
 
     return (
       <div>
-        <UndoControls actions={this.props.actions} />
         <div style={styles} className="ui two columns grid">
           <div className="column">
             <AddParticipantForm onSubmit={this.props.actions.addParticipant} />
@@ -40,15 +38,13 @@ export class Container extends Component {
           </div>
         </div>
         <div className="ui hidden divider"></div>
-        <div>
-          {participantsEditList}
-        </div>
+        {participantsEditList}
       </div>
     );
   }
 }
 
-Container.propTypes = {
+EditPage.propTypes = {
   actions: PropTypes.object.isRequired,
   appState: PropTypes.object.isRequired
 };
@@ -68,4 +64,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Container);
+)(EditPage);

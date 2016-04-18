@@ -5,6 +5,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
+import UndoControls from '../components/UndoControls';
 
 const styles = {
   marginTop: '4em',
@@ -18,18 +19,21 @@ export class Container extends Component {
 
     return (
       <div>
-        <div className="ui fixed inverted violet large pointing menu">
-          <div className="header item" to="/"><b>Scorebut</b></div>
-          {/*}
-          <Link className="item" activeClassName="active" to="/">scores</Link>
-          <Link className="item" activeClassName="active" to="/stats">stats</Link>
-          */}
+        <div className="ui fixed inverted violet large menu">
+          <Link className="header item" to="/"><b>Scora</b></Link>
 
-          <div className="right menu">
-            <IndexLink className="item" activeClassName="active" to="/edit">
-              edit
-            </IndexLink>
+          <div className="right icon borderless menu">
+            <button className="ui white button item" onClick={() => this.props.actions.revertState(-1)}>
+              <i className="undo icon"></i>
+            </button>
+            <button className="ui white button item" onClick={() => this.props.actions.revertState(+1)}>
+              <i className="repeat icon"></i>
+            </button>
+            <Link to="/edit" activeClassName="active" className="item">
+              <i className="edit icon"></i>
+            </Link>
           </div>
+
         </div>
         <div style={styles} className="ui text container">
           {this.props.children}
@@ -39,13 +43,13 @@ export class Container extends Component {
             <i className="gamepad icon"></i>
             Scores
           </Link>
+          <Link to="/total" activeClassName="active" className="item">
+            <i className="trophy icon"></i>
+            Total
+          </Link>
           <Link to="/stats" activeClassName="active" className="item">
             <i className="line chart icon"></i>
             Statistiques
-          </Link>
-          <Link to="/edit" activeClassName="active" className="item">
-            <i className="edit icon"></i>
-            Editer
           </Link>
         </div>
       </div>

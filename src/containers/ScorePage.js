@@ -4,11 +4,16 @@ import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
 import AddParticipantForm from '../components/AddParticipantForm';
 import Participant from '../components/Participant';
-import UndoControls from '../components/UndoControls';
 import { Link, hashHistory } from 'react-router';
 
 
 export class Container extends Component {
+  componentWillMount() {
+    if (!this.props.appState.participants.length) {
+      hashHistory.replace('/edit');
+    }
+  }
+
   render() {
 
     const { scores, currentScores, participants, currentLap } = this.props.appState;
@@ -33,19 +38,18 @@ export class Container extends Component {
       />
     ));
 
-    if (!participantsList.length) {
-      hashHistory.replace('/edit');
-    }
+
 
 
     return (
       <div>
-        <UndoControls actions={this.props.actions} />
         <h2 className="ui horizontal divider header">
           <i className="history icon"></i>
           Tour {currentLap}
         </h2>
-        {participantsList}
+        <div style={{marginTop: 0}} className="ui piled segments">
+          {participantsList}
+        </div>
       </div>
     );
   }

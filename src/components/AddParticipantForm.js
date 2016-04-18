@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 
 /*eslint-disable react/no-set-state */
 
-export class Component extends React.Component {
+export class AddParticipantForm extends React.Component {
 
   constructor(props) {
     super(props);
@@ -47,8 +47,8 @@ export class Component extends React.Component {
   }
 }
 
-Component.propTypes = {
-  onSubmit: PropTypes.element.fn
+AddParticipantForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired
 };
 
-export default Component;
+export default AddParticipantForm;

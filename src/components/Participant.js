@@ -85,10 +85,11 @@ export class Component extends React.Component {
 }
 
 Component.propTypes = {
-  name: PropTypes.element.string,
-  totalScore: PropTypes.element.integer,
-  currentScore: PropTypes.element.integer,
-  onAddScore: PropTypes.element.fn
+  name: PropTypes.string.isRequired,
+  disabled: PropTypes.bool.isRequired,
+  totalScore: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
+  currentScore: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
+  onAddScore: PropTypes.func.isRequired
 };
 
 export default Component;

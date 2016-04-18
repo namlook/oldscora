@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 // import '../styles/about-page.css';
 
-const Component = (props) => {
+const EditParticipant = (props) => {
   const deleteParticipant = (event) => {
     event.preventDefault();
     props.onDelete(props.name);
@@ -46,10 +46,12 @@ const Component = (props) => {
 
 };
 
-Component.propTypes = {
-  name: PropTypes.element.string,
-  onDelete: PropTypes.element.fn,
-  onRename: PropTypes.element.fn
+EditParticipant.propTypes = {
+  name: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onRename: PropTypes.func.isRequired,
+  onMoveUp: PropTypes.func.isRequired,
+  onMoveDown: PropTypes.func.isRequired
 };
 
-export default Component;
+export default EditParticipant;
