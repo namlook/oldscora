@@ -28,14 +28,16 @@ export class Container extends Component {
       }, 0);
     };
 
-    const totalStatistics = Object.keys(scores).map((name) => (
-      <div key={name} className="column center aligned">
+    const totalScoreList = Object.keys(scores).map((name) => ({ name, total: totalFor(name)}));
+    const sortedScores = _.reverse(_.sortBy(totalScoreList, 'total'));
+    const totalStatistics = sortedScores.map((item) => (
+      <div key={item.name} className="column center aligned">
         <div className="ui statistic">
           <div className="label">
-            {name}
+            {item.name}
           </div>
           <div className="value">
-            {totalFor(name)}
+            {item.total}
           </div>
         </div>
       </div>
