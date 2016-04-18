@@ -1,7 +1,10 @@
+/* global window */
 
 import {
   ADD_PARTICIPANT,
   ADD_SCORE,
+  RESET_SCORES,
+  RESET_ALL,
   DELETE_PARTICIPANT,
   RENAME_PARTICIPANT,
   MOVE_UP_PARTICIPANT,
@@ -12,13 +15,18 @@ import {
 import objectAssign from 'object-assign';
 import _ from 'lodash';
 
-const initialState = {
+const { localStorage } = window;
+
+const _initialState = {
   participants: [],
   scores: {},
   currentScores: {},
   currentLap: 1,
   history: 0
 };
+
+const _localState = localStorage.getItem('scoraState');
+const initialState = _localState ? JSON.parse(_localState) : _initialState;
 
 const isLastLap = (currentLap, participants, scores) => {
   const allParticipantsWhoPlayThatLap = Object.keys(scores).filter((name) => (
@@ -115,6 +123,19 @@ const actions = {
     return Object.assign({}, state, { scores, currentLap, currentScores });
   },
 
+  [RESET_SCORES]: (state) => {
+    const scores = state.participants.reduce((acc, name) => {
+      acc[name] = [0];
+      return acc;
+    }, {});
+    return Object.assign({}, _initialState, { scores, participants: state.participants });
+  },
+
+  [RESET_ALL]: (state) => {
+    console.log('reset ALL');
+    return Object.assign({}, _initialState, {});
+  },
+
   [REVERT_STATE]: (state, { index }) => {
     if (stateIndex + index > statesHistory.length) {
       return statesHistory.slice(-1)[0];
@@ -135,5 +156,6 @@ export default (state = initialState, action) => {
     statesHistory = [...statesHistory.slice(0, stateIndex), newState];
     stateIndex += 1;
   }
+  localStorage.setItem('scoraState', JSON.stringify(newState));
   return newState;
 };

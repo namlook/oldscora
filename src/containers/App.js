@@ -8,7 +8,7 @@ import * as actions from '../actions/app';
 import UndoControls from '../components/UndoControls';
 
 const styles = {
-  marginTop: '4em',
+  paddingTop: '4em',
   paddingBottom: '6em'
 };
 
@@ -25,6 +25,16 @@ export class Container extends Component {
       <div>
         <div className="ui fixed inverted violet large menu">
           <Link className="header item" to="/"><b>Scora</b></Link>
+{/*}
+            <div className="ui dropdown item">
+              Language <i className="dropdown icon"></i>
+            <div className="menu transition hidden" tabIndex="-1">
+                <a className="item">English</a>
+                <a className="item">Russian</a>
+                <a className="item">Spanish</a>
+              </div>
+            </div>
+*/}
 
           <div className="right icon borderless menu">
             <button className="ui white button item" onClick={() => this.props.actions.revertState(-1)}>

@@ -16,6 +16,14 @@ export function addScore(participantName, score) {
 	return { type: types.ADD_SCORE, participantName, score };
 }
 
+export function resetScores() {
+	return { type: types.RESET_SCORES };
+}
+
+export function resetAll() {
+	return { type: types.RESET_ALL };
+}
+
 export function moveUpParticipant(participantName) {
 	return { type: types.MOVE_UP_PARTICIPANT, participantName };
 }

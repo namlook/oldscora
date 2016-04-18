@@ -25,7 +25,7 @@ export class EditPage extends Component {
       : null;
 
     const styles = {
-      marginTop: '1em'
+      paddingTop: '1em'
     };
 
     const hintLabel = participants.length ? null : (
@@ -33,6 +33,10 @@ export class EditPage extends Component {
         <i className="info icon"></i>Commencez par ajouter quelques joueurs...
       </div>
     );
+
+    const resetScores = () => {
+      this.props.actions.resetScores();
+    };
 
     return (
       <div>
@@ -46,6 +50,23 @@ export class EditPage extends Component {
           </div>
         </div>
         {participantsEditList}
+        {/*}
+        <div className="ui divider"></div>
+        <div className="ui container center aligned">
+          <div className="ui buttons">
+            <button
+              className="ui red basic button"
+              onClick={() => this.props.actions.resetScores()}>
+                réinitialiser les scores
+            </button>
+            <button
+              className="ui red button"
+              onClick={() => this.props.actions.resetAll()}>
+                supprimer les participants
+            </button>
+          </div>
+        </div>
+        */}
       </div>
     );
   }
