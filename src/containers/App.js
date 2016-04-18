@@ -9,7 +9,7 @@ import UndoControls from '../components/UndoControls';
 
 const styles = {
   marginTop: '4em',
-  marginBottom: '10em'
+  paddingBottom: '6em'
 };
 
 export class Container extends Component {
