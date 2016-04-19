@@ -53,7 +53,7 @@ export class Component extends React.Component {
             <div className="one column center aligned">
               <div className="ui mini action fluid input">
                 <ConfirmButton
-                  className="red"
+                  className="ui red basic button"
                   displayLabel="-"
                   confirmLabel="confirm ?"
                   onConfirm={() => this.addNegativeScore()}
@@ -66,7 +66,7 @@ export class Component extends React.Component {
                   onChange={(e) => this.onScoreChanged(e)}
                 />
                 <ConfirmButton
-                  className="green"
+                  className="ui green basic button"
                   displayLabel="+"
                   confirmLabel="confirm ?"
                   onConfirm={() => this.addPositiveScore()}

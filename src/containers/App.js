@@ -18,7 +18,7 @@ export class Container extends Component {
     // window.scrollTo(0, 0); // scroll to top each time we change page
 
     const bottomMenuDisabled = !this.props.appState.participants.length ? 'disabled segment' : '';
-    const bottomMenuClass = `ui three item labeled icon bottom fixed menu ${bottomMenuDisabled}`;
+    const bottomMenuClass = `ui four item labeled small icon bottom fixed menu ${bottomMenuDisabled}`;
     const bottomMenuStyle = bottomMenuDisabled ? {padding: 0} : {};
 
     return (
@@ -43,9 +43,6 @@ export class Container extends Component {
             <button className="ui white button item" onClick={() => this.props.actions.revertState(+1)}>
               <i className="repeat icon"></i>
             </button>
-            <Link to="/edit" activeClassName="active" className="item">
-              <i className="edit icon"></i>
-            </Link>
           </div>
 
         </div>
@@ -53,6 +50,10 @@ export class Container extends Component {
           {this.props.children}
         </div>
         <div className={bottomMenuClass} style={bottomMenuStyle}>
+          <Link to="/edit" activeClassName="active" className="item">
+            <i className="user icon"></i>
+            Participants
+          </Link>
           <Link to="/" activeClassName="active" className="item">
             <i className="gamepad icon"></i>
             Scores
