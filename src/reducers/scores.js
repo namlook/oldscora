@@ -25,8 +25,26 @@ const _initialState = {
   history: 0
 };
 
-const _localState = localStorage.getItem('scoraState');
-const initialState = _localState ? JSON.parse(_localState) : _initialState;
+let initialState;
+try {
+  initialState = JSON.parse(localStorage.getItem('scoraState'));
+} catch (e) {
+  initialState = null;
+  console.log('no local state found');
+}
+initialState = initialState || _initialState;
+
+// let statesHistory;
+// try {
+//   statesHistory = JSON.parse(localStorage.getItem('scoraStateHistory'));
+// } catch (e) {
+//   statesHistory = null;
+// }
+// statesHistory = statesHistory || [];
+//
+// let stateIndex = parseFloat(localStorage.getItem('scoraStateHistoryIndex') || 0);
+let statesHistory = [];
+let stateIndex = 0;
 
 const isLastLap = (currentLap, participants, scores) => {
   const allParticipantsWhoPlayThatLap = Object.keys(scores).filter((name) => (
@@ -34,9 +52,6 @@ const isLastLap = (currentLap, participants, scores) => {
   ));
   return allParticipantsWhoPlayThatLap.length === participants.length;
 };
-
-let statesHistory = [];
-let stateIndex = 0;
 
 
 const actions = {
@@ -132,11 +147,15 @@ const actions = {
   },
 
   [RESET_ALL]: (state) => {
-    console.log('reset ALL');
+    statesHistory = [];
+    stateIndex = 0;
+    localStorage.setItem('scoraStateHistory', JSON.stringify(statesHistory));
+    localStorage.setItem('scoraStateHistoryIndex', stateIndex);
     return Object.assign({}, _initialState, {});
   },
 
   [REVERT_STATE]: (state, { index }) => {
+    console.log(stateIndex, statesHistory.length, statesHistory);
     if (stateIndex + index > statesHistory.length) {
       return statesHistory.slice(-1)[0];
     }
@@ -152,9 +171,12 @@ const actions = {
 export default (state = initialState, action) => {
   const actionFn = actions[action.type];
   const newState = actionFn ? actionFn(state, action) : state;
-  if (action.type != REVERT_STATE) {
+  if (action.type != REVERT_STATE || action.type != RESET_ALL) {
     statesHistory = [...statesHistory.slice(0, stateIndex), newState];
     stateIndex += 1;
+    localStorage.setItem('scoraStateHistory', JSON.stringify(statesHistory));
+    localStorage.setItem('scoraStateHistoryIndex', stateIndex);
+
   }
   localStorage.setItem('scoraState', JSON.stringify(newState));
   return newState;

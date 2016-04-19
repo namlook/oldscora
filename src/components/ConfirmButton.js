@@ -11,7 +11,8 @@ export class Component extends React.Component {
     this.state = { confirmState: false, timer: null };
   }
 
-  clicked() {
+  clicked(event) {
+    event.preventDefault();
     if (this.state.confirmState) {
       clearTimeout(this.state.timer);
       this.setState({ confirmState: false, timer: null });
@@ -25,10 +26,12 @@ export class Component extends React.Component {
   }
 
   render() {
-    const className = `${this.props.className} ui basic button`;
+    const className = this.state.confirmState
+      ? `${this.props.className} ${this.props.confirmClassName}`
+      : `${this.props.className} ${this.props.displayClassName}`;
     const { props } = this;
     return (
-      <button className={className} onClick={(e) => this.clicked()}>
+      <button className={className} onClick={(e) => this.clicked(e)}>
         {this.state.confirmState ? props.confirmLabel : props.displayLabel}
       </button>
     );
@@ -37,6 +40,8 @@ export class Component extends React.Component {
 
 Component.propTypes = {
   className: PropTypes.string,
+  confirmClassName: PropTypes.string,
+  displayClassName: PropTypes.string,
   displayLabel: PropTypes.string.isRequired,
   confirmLabel: PropTypes.string.isRequired,
   onConfirm: PropTypes.func.isRequired
