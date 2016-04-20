@@ -1,10 +1,11 @@
 // import React, { PropTypes } from 'react';
-import { Link, IndexLink } from 'react-router';
+import { Link, IndexLink, hashHistory } from 'react-router';
 
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from '../actions/app';
+import DropDown from '../components/DropDown';
 import UndoControls from '../components/UndoControls';
 
 const styles = {
@@ -14,9 +15,17 @@ const styles = {
 
 export class Container extends Component {
 
-  render() {
-    // window.scrollTo(0, 0); // scroll to top each time we change page
+  resetAll() {
+    this.props.actions.resetAll();
+    hashHistory.replace('/edit');
+  }
 
+  resetScores() {
+    this.props.actions.resetScores();
+    hashHistory.replace('/');
+  }
+
+  render() {
     const bottomMenuDisabled = !this.props.appState.participants.length ? 'disabled segment' : '';
     const bottomMenuClass = `ui four item labeled small icon bottom fixed menu ${bottomMenuDisabled}`;
     const bottomMenuStyle = bottomMenuDisabled ? {padding: 0} : {};
@@ -25,16 +34,20 @@ export class Container extends Component {
       <div>
         <div className="ui fixed inverted violet large menu">
           <Link className="header item" to="/"><b>Scora</b></Link>
-{/*}
-            <div className="ui dropdown item">
-              Language <i className="dropdown icon"></i>
-            <div className="menu transition hidden" tabIndex="-1">
-                <a className="item">English</a>
-                <a className="item">Russian</a>
-                <a className="item">Spanish</a>
+
+          <DropDown className="item">
+              <i className="trash icon"></i>
+              <div className="menu">
+                <div onClick={() => this.resetScores()} className="item">
+                  <i className="gamepad icon"></i>
+                  réinitialiser les scores
+                </div>
+                <div onClick={() => this.resetAll()} className="item">
+                  <i className="user red icon"></i>
+                  <span style={{color: 'red'}}>supprimer les participants</span>
+                </div>
               </div>
-            </div>
-*/}
+            </DropDown>
 
           <div className="right icon borderless menu">
             <button className="ui white button item" onClick={() => this.props.actions.revertState(-1)}>
