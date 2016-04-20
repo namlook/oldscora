@@ -21,6 +21,7 @@
   "license": "MIT",
   "dependencies": {
     "connect-history-api-fallback": "1.2.0",
+    "jquery": "2.2.3",
     "object-assign": "4.0.1",
     "react": "15.0.1",
     "react-dom": "15.0.1",
